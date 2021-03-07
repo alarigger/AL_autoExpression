@@ -67,12 +67,17 @@ function AL_AutoExpression(){
 		
 		if ( d.exec() ){	
 		
+		
 			var selected_column_index = select_column_list.indexOf(INPUT.currentItem);
 			var selected_attr_index = select_attribute_list.indexOf(OUTPUT.currentItem);
 		
 			var INPUT_COLUMN = avaible_columns[selected_column_index];
 	
 			var OUTPUT_ATTRIBUTE = avaible_attributes[selected_attr_index];
+			
+			// var num2 = node.getTextAttr(myNode, frame.current(), "PALETTES.NUMBER");
+			LENGTH = node.getTextAttr(OUTPUT_ATTRIBUTE.node,frame.current(),"PIVOT.X")
+			MessageLog.trace(LENGTH);
 			
 			MessageLog.trace("INPUT_COLUMN");
 			MessageLog.trace(INPUT_COLUMN.display);
@@ -111,8 +116,10 @@ function AL_AutoExpression(){
 	
 	function generate_modulo_exp(_inputcolum, _cycle,_length){
 		
-		//exmeple (value(column("WR"))%360)/41.789
-		var expression = '( value(column( "'+_inputcolum+'" )) % '+_cycle+' ) / '+_length;
+
+		
+		//exmeple (value(column("WR"))%360)/360 ) * 5
+		var expression = '(( value(column( "'+_inputcolum+'" )) % '+_cycle+' ) / '+_cycle+' ) * '+_length;
 		
 		return expression;
 
